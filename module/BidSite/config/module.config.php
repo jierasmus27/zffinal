@@ -2,14 +2,14 @@
 return array(
     'controllers' => array(
         'invokables' => array(
-            'User\Controller\User' => 'User\Controller\UserController',
+            'BidSite\Controller\User' => 'BidSite\Controller\UserController',
         ),
     ),
     
     // The following section is new and should be added to your file
     'router' => array(
         'routes' => array(
-            'album' => array(
+            'user' => array(
                 'type'    => 'segment',
                 'options' => array(
                     'route'    => '/user[/:action][/:id]',
@@ -18,8 +18,21 @@ return array(
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'User\Controller\User',
+                        'controller' => 'BidSite\Controller\User',
                         'action'     => 'index',
+                    ),
+                ),
+            ),
+            'user_c' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/user[/:id]',
+                    'constraints' => array(
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'BidSite\Controller\User',
+                        'action'     => 'view',
                     ),
                 ),
             ),

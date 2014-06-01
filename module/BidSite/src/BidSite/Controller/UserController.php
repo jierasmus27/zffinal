@@ -1,6 +1,6 @@
 <?php
 
-namespace User\Controller;
+namespace BidSite\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -16,6 +16,9 @@ class UserController extends AbstractActionController {
         return new ViewModel();
     }
     public function deleteAction() {
+        return new ViewModel();
+    }
+    public function viewAction() {
         return new ViewModel();
     }
 }

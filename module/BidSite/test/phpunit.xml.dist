@@ -2,8 +2,8 @@
 
 <phpunit bootstrap="Bootstrap.php">
     <testsuites>
-        <testsuite name="user">
-            <directory>./UserTest</directory>
+        <testsuite name="bidsite">
+            <directory>./BidSiteTest</directory>
         </testsuite>
     </testsuites>
 </phpunit>

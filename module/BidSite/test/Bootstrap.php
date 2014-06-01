@@ -1,5 +1,5 @@
 <?php
-namespace UserTest;//Change this namespace for your test
+namespace BidSiteTest;//Change this namespace for your test
 
 use Zend\Loader\AutoloaderFactory;
 use Zend\Mvc\Service\ServiceManagerConfig;

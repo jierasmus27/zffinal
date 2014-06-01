@@ -1,8 +1,8 @@
 <?php
-namespace UserTest\Controller;
+namespace BidSiteTest\Controller;
 
-use UserTest\Bootstrap;
-use User\Controller\UserController;
+use BidSiteTest\Bootstrap;
+use BidSite\Controller\UserController;
 use Zend\Http\Request;
 use Zend\Http\Response;
 use Zend\Mvc\MvcEvent;
@@ -67,6 +67,16 @@ class UserControllerTest extends PHPUnit_Framework_TestCase
     public function testIndexActionCanBeAccessed()
     {
         $this->routeMatch->setParam('action', 'index');
+
+        $result   = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+    
+    public function testViewActionCanBeAccessed()
+    {
+        $this->routeMatch->setParam('action', 'view');
 
         $result   = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();

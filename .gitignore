@@ -8,3 +8,7 @@ nbproject
 .settings
 composer.lock
 vendor/bin
+vendor/
+composer.phar
+*.swp
+bin/

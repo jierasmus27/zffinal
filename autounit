@@ -1,0 +1,7 @@
+watch ('.*\.(php|feature)$') {|phpFile| run_php_unit(phpFile)} 
+
+def run_php_unit(modified_file)
+    system('clear')
+    system('php bin/behat')
+    system("phpunit -c /srv/www/zffinal/module/BidSite/test/phpunit.xml.dist")
+end

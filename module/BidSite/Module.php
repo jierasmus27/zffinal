@@ -1,5 +1,5 @@
 <?php
-namespace User;
+namespace BidSite;
 
 class Module {
     public function getAutoloaderConfig()
