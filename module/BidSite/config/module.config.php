@@ -32,7 +32,7 @@ return array(
                     ),
                     'defaults' => array(
                         'controller' => 'BidSite\Controller\User',
-                        'action'     => 'view',
+                        'action'     => 'edit',
                     ),
                 ),
             ),
