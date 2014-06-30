@@ -25,7 +25,7 @@ class Item implements ItemInterface {
     protected $model;
     
     /**
-     * @var int
+     * @var \BidSite\Entity\Manufacturer
      */
     protected $manufacturer;
     
@@ -60,7 +60,7 @@ class Item implements ItemInterface {
     
     /**
      * Return Item manufacturer
-     * @return Manufacturer
+     * @return \BidSite\Entity\Manufacturer Manufacturer
      */
     public function getManufacturer() {
         return $this->manufacturer;
@@ -106,8 +106,8 @@ class Item implements ItemInterface {
     }
     
     /**
-     * Set Item manufacturer_id
-     * @param int $manufacturer_id
+     * Set Item Manufacturer
+     * @param \BidSite\Entity\Manufacturer $manufacturer
      * @return \BidSite\Entity\Item
      */
     public function setManufacturer($manufacturer) {
