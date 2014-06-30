@@ -3,6 +3,13 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'BidSite\Controller\User' => 'BidSite\Controller\UserController',
+            'item' => 'BidSite\Controller\ItemController',
+        ),
+    ),
+    
+    'service_manager' => array(
+        'aliases' => array(
+            'bidsite_zend_db_adapter' => 'Zend\Db\Adapter\Adapter',
         ),
     ),
     
@@ -36,12 +43,29 @@ return array(
                     ),
                 ),
             ),
+            'item' => array(
+                'type' => 'Segment',
+                'priority' => 1000,
+                'options' => array(
+                    'route' => '/item[/:action][/:id]',
+                    'defaults' => array(
+                        'controller' => 'item',
+                        'action'     => 'index',
+                     ),
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ),                   
+                ),
+                'may_terminate' => true,
+            ),
         ),
     ),
     
     'view_manager' => array(
         'template_path_stack' => array(
             'user' => __DIR__ . '/../view',
+            'item' => __DIR__ . '/../view',
         ),
     ),
 );

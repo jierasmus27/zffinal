@@ -8,6 +8,10 @@
  */
 
 return array(
+    'application' => array(
+        'name' => 'Bidding Site Demo',
+        'version' => '1.00 alpha',
+    ),
     'router' => array(
         'routes' => array(
             'home' => array(

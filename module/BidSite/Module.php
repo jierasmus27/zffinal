@@ -5,6 +5,7 @@ use BidSite\Model\User;
 use BidSite\Model\UserTable;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Mvc\MvcEvent;
 
 class Module {
     public function getAutoloaderConfig()
@@ -28,6 +29,10 @@ class Module {
     
     public function getServiceConfig() {
         return array(
+            'invokables' => array(
+                'bidsite_item_service' => 'BidSite\Service\ItemService',
+                'bidsite_item_form'    => 'BidSite\Form\ItemForm',
+            ),
             'factories' => array(
                 'BidSite\Model\UserTable' => function($sm) {
                     $tableGateway = $sm->get('UserTableGateway');
@@ -40,8 +45,35 @@ class Module {
                     $resultSetPrototype->setArrayObjectPrototype(new User());
                     return new TableGateway('user', $dbAdapter, null, $resultSetPrototype);
                 },
+                'bidsite_module_options' => 'BidSite\Factory\ModuleOptionsFactory',
+                'bidsite_item_mapper'   => 'BidSite\Factory\ItemMapperFactory',
+                'bidsite_item_hydrator' => 'BidSite\Factory\Mapper\ItemHydratorFactory',
+                'bidsite_manufacturer_mapper'   => 'BidSite\Factory\ManufacturerMapperFactory',
+                'bidsite_manufacturer_hydrator' => 'BidSite\Factory\Mapper\ManufacturerHydratorFactory',
             )
         );
+    }
+    
+    public function onBootstrap(MvcEvent $e) {
+        $eventManager = $e->getApplication()->getEventManager();
+        $eventManager->attach(\Zend\Mvc\MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'handleError'));
+        $eventManager->attach(\Zend\Mvc\MvcEvent::EVENT_RENDER_ERROR, array($this, 'handleError'));
+    }
+    
+    public function handleError(MvcEvent $e) {
+        $controller = $e->getController();
+        $error = $e->getParam('error');
+        $exception = $e->getParam('exception');
+        $message = "Error: ". $error;
+        
+        print_r($exception->getMessage());
+        
+        if ($exception instanceOf \Exception) {
+            $message .= ", Exception: (". $exception->getMessage(). "): ".
+                        $exception->getTraceAsString();
+        }
+        
+        error_log($message);
     }
 }
 ?>
