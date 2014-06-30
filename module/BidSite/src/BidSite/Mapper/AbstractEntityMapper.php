@@ -50,7 +50,7 @@ abstract class AbstractEntityMapper extends AbstractDbMapper {
             $tableName = $this->getTableName();
         }
 
-        return parent::update($entity, $where, $this->getTableIdentifier(), $hydrator);
+        return parent::update($entity, $where, $this->getTableIdentifier(), $this->getHydrator());
     }
     
     public function getTableName() {

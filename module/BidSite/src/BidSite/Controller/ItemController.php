@@ -63,7 +63,6 @@ class ItemController extends AbstractActionController {
         $post = $request->getPost();
         
         $item = $service->findById($id);
-        print_r($item);
         $manufacturers = $service->loadAllManufacturers();
         
         $arr_manufacturers = array();

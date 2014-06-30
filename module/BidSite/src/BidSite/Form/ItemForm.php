@@ -12,6 +12,8 @@ use Zend\Form\Element;
 Use Zend\InputFilter\InputFilterInterface;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\Factory as InputFactory;
+use BidSite\Mapper\ItemHydrator;
+use BidSite\Entity\Item;
 
 class ItemForm extends Form {
     protected $inputFilter;
@@ -19,6 +21,8 @@ class ItemForm extends Form {
     public function __construct() {
         parent::__construct('item');
         $this->setAttribute('method', 'post');
+        $this->setHydrator(new ItemHydrator(false))
+             ->setObject(new Item());
         
         $this->add(array(
             'name' => 'id',

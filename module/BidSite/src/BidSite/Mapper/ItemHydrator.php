@@ -16,15 +16,11 @@ class ItemHydrator implements HydratorInterface {
         $arrItem["name"] = ($item->name == "") ? null : $item->name;
         $arrItem["model"] = ($item->model == "") ? null : $item->model;
         $arrItem["manufacturer_id"] = ($item->manufacturer->id == "") ? null : $item->manufacturer->id;
-        $arrItem["manufacturer"] = ($item->manufacturer == "") ? null : $item->manufacturer;
-        $arrItem["manufacturer"]->id = ($item->manufacturer->id == "") ? null : $item->manufacturer->id;
-        $arrItem["manufacturer"]->name = "test"; //($item->manufacturer->name == "") ? null : $item->manufacturer->name;
         $arrItem["description"] = ($item->description == "") ? null : $item->description;
         return $arrItem;
     }
     
     public function hydrate(array $data, $item) {
-        print_r($data);
         $item->id = isset($data["id"]) ? $data["id"] : null;
         $item->name = isset($data["name"]) ? $data["name"] : null;
         $item->model = isset($data["model"]) ? $data["model"] : null;

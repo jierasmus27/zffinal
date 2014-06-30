@@ -73,20 +73,20 @@ class ItemService extends EventProvider implements ServiceManagerAwareInterface 
         return $this->getManufacturerMapper()->findAll();
     }
     
-    public function update(array $data) {
-        $entityClass = $this->getOptions()->getEntityClass("item");
+    public function update($item) {
+        #$entityClass = $this->getOptions()->getEntityClass("item");
         $form        = $this->getItemForm();
 
         $form->setHydrator($this->getFormHydrator());
-        $form->bind(new $entityClass());
-        $form->setData($data);
+        $form->bind($item);
+        #$form->setData($data);
 
-        if ($form->isValid()) {            
+        if ($form->isValid()) {
             $item   = $form->getData();
             $events = $this->getEventManager();
 
             $events->trigger(__FUNCTION__, $this, compact('item', 'form'));            
-            $val = $this->getItemMapper()->update($item);
+            $this->getItemMapper()->update($item);
             $events->trigger(__FUNCTION__.'.post', $this, compact('item', 'form'));
 
             return $item;
