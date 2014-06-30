@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Description of ItemController
+ * ItemController class
  *
  * @author jacoe
  */
@@ -12,9 +12,22 @@ use BidSite\Form\ItemForm;
 use BidSite\Service\ItemService;
 
 class ItemController extends AbstractActionController {
+    
+    /**
+     * @var \BidSite\Service\ItemService
+     */
     protected $itemService;
+    
+    /**
+     * @var \BidSite\Form\ItemForm 
+     */
     protected $itemForm;
     
+    /**
+     * View an Item
+     * 
+     * @return array Id and Item view form
+     */
     public function viewAction() {        
         $id = (int) $this->params()->fromRoute('id', 0);
         if (!$id) {
@@ -51,6 +64,11 @@ class ItemController extends AbstractActionController {
         );
     }
     
+    /**
+     * Edit an Item
+     * 
+     * @return array Id and Item view form
+     */
     public function editAction() {        
         $id = (int) $this->params()->fromRoute('id', 0);
         if (!$id) {
@@ -96,6 +114,11 @@ class ItemController extends AbstractActionController {
         );       
     }
     
+    /**
+     * Add an Item
+     * 
+     * @return array Item add form
+     */
     public function addAction() {        
         $request = $this->getRequest();
         $service = $this->getItemService();
@@ -132,6 +155,11 @@ class ItemController extends AbstractActionController {
         );       
     }
     
+    /**
+     * Return index of all items
+     * 
+     * @return array
+     */
     public function indexAction() {
         $service = $this->getItemService();
 
@@ -142,6 +170,11 @@ class ItemController extends AbstractActionController {
         );
     }
     
+    /**
+     * Return the relevant Item Form
+     * 
+     * @return \Bidite\Form\ItemForm
+     */
     public function getItemForm() {
         if (!$this->itemForm) {
             $this->setItemForm($this->getServiceLocator()->get('bidsite_item_form'));
@@ -149,6 +182,12 @@ class ItemController extends AbstractActionController {
         return $this->itemForm;
     }
     
+    /**
+     * Set the relevant Item Form
+     * 
+     * @param \Bidite\Form\ItemForm
+     * @return ItemController
+     */
     public function setItemForm(ItemForm $itemForm) {
         $this->itemForm = $itemForm;
         $fm = $this->flashMessenger()->setNamespace('bidsite-item-form')->getMessages();
@@ -158,6 +197,11 @@ class ItemController extends AbstractActionController {
         return $this;
     }
     
+    /**
+     * Return the Item Service object
+     * 
+     * @return \BidSite\Service\ItemService
+     */
     public function getItemService() {
         if (!$this->itemService) {
             $this->itemService = $this->getServiceLocator()->get('bidsite_item_service');
@@ -165,6 +209,12 @@ class ItemController extends AbstractActionController {
         return $this->itemService;
     }
 
+    /**
+     * Set the Item Service object
+     * 
+     * @param \BidSite\Service\ItemService
+     * @return ItemController
+     */
     public function setItemService(ItemService $itemService)
     {
         $this->itemService = $itemService;

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Description of ModuleOptionsFactory
+ * ModuleOptionsFactory class
  *
  * @author jacoe
  */
@@ -13,6 +13,11 @@ use BidSite\Options\ModuleOptions;
 
 class ModuleOptionsFactory implements FactoryInterface
 {
+    /**
+     * Return the ModuleOptions for the site
+     * @param \Zend\ServiceManager\ServiceLocatorInterface $serviceLocator
+     * @return \BidSite\Options\ModuleOptions
+     */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $config = $serviceLocator->get('Config');

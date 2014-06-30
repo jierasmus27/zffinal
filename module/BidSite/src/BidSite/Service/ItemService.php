@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Description of ItemService
+ * Item Service class
  *
  * @author jacoe
  */
@@ -26,6 +26,11 @@ class ItemService extends EventProvider implements ServiceManagerAwareInterface 
     // Additional mappers needed
     protected $manufacturerMapper;
     
+    /**
+     * Add a new Item
+     * @param \BidSite\Entity\Item $item
+     * @return boolean
+     */
     public function add($item) {
         $entityClass = $this->getOptions()->getEntityClass("item");
         $form        = $this->getItemForm();
@@ -47,6 +52,11 @@ class ItemService extends EventProvider implements ServiceManagerAwareInterface 
         return false;
     }
     
+    /**
+     * Find an Item based on Id
+     * @param int $id
+     * @return \BidSite\Entity\Item
+     */
     public function findById($id) {
         $results = $this->events->trigger(__FUNCTION__.'.pre', $this, 
             array('id' => $id), 
@@ -65,14 +75,27 @@ class ItemService extends EventProvider implements ServiceManagerAwareInterface 
         return $item;
     }
     
+    /**
+     * Return all Items and join one-to-one db relationships
+     * @return array
+     */
     public function findAll() {
         return $this->getItemMapper()->findAllByIdAndJoinOneToOne($this->getManufacturerMapper());
     }
     
+    /**
+     * Get all Manufacturers
+     * @return array
+     */
     public function loadAllManufacturers() {
         return $this->getManufacturerMapper()->findAll();
     }
     
+    /**
+     * Update an Item entity
+     * @param \BidSite\Entity\Item $item
+     * @return boolean
+     */
     public function update($item) {
         #$entityClass = $this->getOptions()->getEntityClass("item");
         $form        = $this->getItemForm();
@@ -94,12 +117,21 @@ class ItemService extends EventProvider implements ServiceManagerAwareInterface 
         return false;
     }    
     
+    /**
+     * Set the Item mapper
+     * @param \BidSite\Mapper\ItemMapperInterface $itemMapper
+     * @return \BidSite\Service\ItemService
+     */
     public function setItemMapper(ItemMapperInterface $itemMapper)
     {
         $this->itemMapper = $itemMapper;
         return $this;
     }
     
+    /**
+     * Return Item Mapper
+     * @return \BidSite\Mapper\ItemMapperInterface
+     */
     public function getItemMapper()
     {
         if (null === $this->itemMapper) {
@@ -108,12 +140,21 @@ class ItemService extends EventProvider implements ServiceManagerAwareInterface 
         return $this->itemMapper;
     }
 
+    /**
+     * Set Manufacturer mapper
+     * @param \BidSite\Mapper\ManufacturerMapperInterface $manufacturerMapper
+     * @return \BidSite\Service\ItemService
+     */
     public function setManufacturerMapper(ManufacturerMapperInterface $manufacturerMapper)
     {
         $this->manufacturerMapper = $manufacturerMapper;
         return $this;
     }
     
+    /**
+     * Return Manufacturer mapper
+     * @return \BidSite\Mapper\ManufacturerMapper
+     */
     public function getManufacturerMapper()
     {
         if (null === $this->manufacturerMapper) {
@@ -122,6 +163,10 @@ class ItemService extends EventProvider implements ServiceManagerAwareInterface 
         return $this->manufacturerMapper;
     }
 
+    /**
+     * Return Item form
+     * @return \BidSite\Form\ItemForm
+     */
     public function getItemForm()
     {
         if (null === $this->itemForm) {
@@ -132,12 +177,21 @@ class ItemService extends EventProvider implements ServiceManagerAwareInterface 
         return $this->itemForm;
     }
 
+    /**
+     * Set Item form
+     * @param \Zend\Form\FormInterface $itemForm
+     * @return \BidSite\Service\ItemService
+     */
     public function setItemForm(Form $itemForm)
     {
         $this->itemForm = $itemForm;
         return $this;
     }
     
+    /**
+     * Return Module Options
+     * @return \BidSite\Options\ModuleOptions
+     */
     public function getOptions()
     {
         if (!$this->options instanceof ServiceOptions) {
@@ -146,22 +200,39 @@ class ItemService extends EventProvider implements ServiceManagerAwareInterface 
         return $this->options;
     }
 
+    /**
+     * Set Module Options
+     * @param \BidSite\Options\ServiceOptionsInterface $options
+     */
     public function setOptions(ServiceOptions $options)
     {
         $this->options = $options;
     }
     
+    /**
+     * Return Service Manager
+     * @return string
+     */
     public function getServiceManager()
     {
         return $this->serviceManager;
     }
 
+    /**
+     * Set Service Manager
+     * @param \Zend\ServiceManager\ServiceManager $serviceManager
+     * @return \BidSite\Service\ItemService
+     */
     public function setServiceManager(ServiceManager $serviceManager)
     {
         $this->serviceManager = $serviceManager;
         return $this;
     }
 
+    /**
+     * Return Item form Hydrator
+     * @return \BidSite\Mapper\ItemHydrator
+     */
     public function getFormHydrator()
     {
         if (!$this->formHydrator instanceof HydratorInterface) {
@@ -173,6 +244,11 @@ class ItemService extends EventProvider implements ServiceManagerAwareInterface 
         return $this->formHydrator;
     }
 
+    /**
+     * Set Item form Hydrator
+     * @param \BidSite\Mapper\HydratorInterface $formHydrator
+     * @return \BidSite\Service\ItemService
+     */
     public function setFormHydrator(HydratorInterface $formHydrator)
     {
         $this->formHydrator = $formHydrator;

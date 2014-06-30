@@ -15,6 +15,12 @@ use BidSite\Mapper\ItemMapper;
 use BidSite\Options;
 
 class ItemMapperFactory implements FactoryInterface {
+    
+    /**
+     * Set up and return an ItemMapper instance
+     * @param \Zend\ServiceManager\ServiceLocatorInterface $serviceLocator
+     * @return \BidSite\Mapper\ItemMapper
+     */
     public function createService(ServiceLocatorInterface $serviceLocator) {
         $options = $serviceLocator->get('bidsite_module_options');
         $dbAdapter = $serviceLocator->get('bidsite_zend_db_adapter');

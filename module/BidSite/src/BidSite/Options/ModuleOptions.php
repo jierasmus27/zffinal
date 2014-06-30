@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Description of ModuleOptions
+ * Module Options for the BidSite module
  *
  * @author jacoe
  */
@@ -11,7 +11,15 @@ use Zend\Stdlib\AbstractOptions;
 
 class ModuleOptions extends AbstractOptions implements ServiceOptionsInterface {
 
+    /**
+     * @var string
+     */
     protected $logoutRedirectRoute = 'bidsite/login';
+    
+    /**
+     * Array containing all db table mappings
+     * @var array
+     */
     protected $arrConfig = array('item' => array(
                                      'entityClass' => 'BidSite\Entity\Item',
                                      'tableName' => 'item',
@@ -22,15 +30,30 @@ class ModuleOptions extends AbstractOptions implements ServiceOptionsInterface {
                                      'database' => 'zffinal')
                                 );
     
+    /**
+     * Set login redirect route
+     * @param string $loginRedirectRoute
+     * @return \BidSite\Options\ModuleOptions
+     */
     public function setLoginRedirectRoute($loginRedirectRoute) {
         $this->loginRedirectRoute = $loginRedirectRoute;
         return $this;
     }
 
+    /**
+     * Return login redirect route
+     * @return string
+     */
     public function getLoginRedirectRoute() {
         return $this->loginRedirectRoute;
     }
     
+    /**
+     * Set Table Name for the entity
+     * @param string $entity
+     * @param string $tableName
+     * @throws \Exception
+     */
     public function setTableName($entity, $tableName) {
         if (array_key_exists($entity,$this->arrConfig)) {
             $this->arrConfig[$entity]["tableName"] = $tableName;
@@ -39,6 +62,12 @@ class ModuleOptions extends AbstractOptions implements ServiceOptionsInterface {
         }
     }
     
+    /**
+     * Return Table Name for entity 
+     * @param string $entity
+     * @return string
+     * @throws \Exception
+     */
     public function getTableName($entity) {
         if (array_key_exists($entity, $this->arrConfig) && (array_key_exists("tableName", $this->arrConfig[$entity]))) {
             return $this->arrConfig[$entity]["tableName"];
@@ -47,6 +76,12 @@ class ModuleOptions extends AbstractOptions implements ServiceOptionsInterface {
         }
     }
     
+    /**
+     * Set entity class name
+     * @param string $entity
+     * @param string $entityClass
+     * @throws \Exception
+     */
     public function setEntityClass($entity, $entityClass) {
         if (array_key_exists($entity, $this->arrConfig)) {
             $this->arrConfig[$entity]["entityClass"] = $entityClass;
@@ -55,6 +90,12 @@ class ModuleOptions extends AbstractOptions implements ServiceOptionsInterface {
         }
     }
     
+    /**
+     * Return entity class name
+     * @param string $entity
+     * @return string
+     * @throws \Exception
+     */
     public function getEntityClass($entity) {
         if (array_key_exists($entity, $this->arrConfig) && (array_key_exists("entityClass", $this->arrConfig[$entity]))) {
             return $this->arrConfig[$entity]["entityClass"];

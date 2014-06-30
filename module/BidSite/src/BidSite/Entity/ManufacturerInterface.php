@@ -2,6 +2,7 @@
 
 /**
  * Interface for Manufacturer Entity
+ * 
  * @author jacoe
  */
 namespace BidSite\Entity;

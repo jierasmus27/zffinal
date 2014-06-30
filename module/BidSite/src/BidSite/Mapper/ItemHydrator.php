@@ -7,9 +7,13 @@
  */
 namespace BidSite\Mapper;
 
-//use Zend\Stdlib\Hydrator\
-
 class ItemHydrator implements HydratorInterface {
+    
+    /**
+     * Extract array from Item object
+     * @param \BidSite\Entity\Item $item
+     * @return array
+     */
     public function extract($item) {
         $arrItem = array();
         $arrItem["id"] = ($item->id == "") ? null : $item->id;
@@ -20,6 +24,12 @@ class ItemHydrator implements HydratorInterface {
         return $arrItem;
     }
     
+    /**
+     * Hydrate an Item from data array
+     * @param array $data
+     * @param \BidSite\Entity\Item $item
+     * @return \BidSite\Entity\Item $item
+     */
     public function hydrate(array $data, $item) {
         $item->id = isset($data["id"]) ? $data["id"] : null;
         $item->name = isset($data["name"]) ? $data["name"] : null;

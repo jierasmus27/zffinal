@@ -1,7 +1,7 @@
 <?php
 
 /**
- *
+ * Interface for Module Options 
  * @author jacoe
  */
 namespace BidSite\Options;

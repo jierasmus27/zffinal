@@ -29,16 +29,10 @@ class Item implements ItemInterface {
      */
     protected $manufacturer;
     
-    //public $manufacturer_id;
-    
     /**
      * @var string 
      */
     protected $description;
-    
-    public function __construct() {
-        $manufacturer = new Manufacturer();
-    }
     
     /**
      * Return Item Id

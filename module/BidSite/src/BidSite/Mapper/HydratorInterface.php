@@ -2,6 +2,7 @@
 
 /**
  * Interface for Hydrator
+ * 
  * @author jacoe
  */
 namespace BidSite\Mapper;

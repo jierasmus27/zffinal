@@ -15,6 +15,12 @@ use BidSite\Mapper\ManufacturerMapper;
 use BidSite\Options;
 
 class ManufacturerMapperFactory implements FactoryInterface {
+    
+    /**
+     * et up and return a ManufacturerMapper instance
+     * @param \Zend\ServiceManager\ServiceLocatorInterface $serviceLocator
+     * @return \BidSite\Mapper\ManufacturerMapper
+     */
     public function createService(ServiceLocatorInterface $serviceLocator) {
         $options = $serviceLocator->get('bidsite_module_options');
         $dbAdapter = $serviceLocator->get('bidsite_zend_db_adapter');

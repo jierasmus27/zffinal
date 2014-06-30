@@ -19,10 +19,6 @@ class Manufacturer implements ManufacturerInterface {
      */
     protected $name;
     
-    public function __contstruct() {
-        return $this;
-    }
-    
     /**
      * Return Item Id
      * @return int
