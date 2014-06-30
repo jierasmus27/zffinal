@@ -34,17 +34,6 @@ class Module {
                 'bidsite_item_form'    => 'BidSite\Form\ItemForm',
             ),
             'factories' => array(
-                'BidSite\Model\UserTable' => function($sm) {
-                    $tableGateway = $sm->get('UserTableGateway');
-                    $table = new UserTable($tableGateway);
-                    return $table;
-                },
-                'UserTableGateway' => function ($sm) {
-                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                    $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new User());
-                    return new TableGateway('user', $dbAdapter, null, $resultSetPrototype);
-                },
                 'bidsite_module_options' => 'BidSite\Factory\ModuleOptionsFactory',
                 'bidsite_item_mapper'   => 'BidSite\Factory\ItemMapperFactory',
                 'bidsite_item_hydrator' => 'BidSite\Factory\Mapper\ItemHydratorFactory',
@@ -66,13 +55,10 @@ class Module {
         $exception = $e->getParam('exception');
         $message = "Error: ". $error;
         
-        print_r($exception->getMessage());
-        
         if ($exception instanceOf \Exception) {
             $message .= ", Exception: (". $exception->getMessage(). "): ".
                         $exception->getTraceAsString();
-        }
-        
+        }        
         error_log($message);
     }
 }
