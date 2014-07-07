@@ -1,11 +1,62 @@
 <?php
-
-foreach ($items as $item) {
-    print $item->id. "<br />";
-    print $item->name. "<br />";
-    print $item->description. "<br />";
-    print $item->manufacturer->id. "<br />";
-    print $item->manufacturer->name. "<br />";
-}
-
+$title = "All Items";
+$this->headTitle($title);
 ?>
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+    
+    <a href="<?php echo $this->url('item', array('action' => 'add')); ?>">
+    <button type="button" class="btn btn-primary">
+            
+    <span class="glyphicon glyphicon-plus"></span>
+    <span class="glyphicon glyphicon-camera"></span> Add a new item
+    </button>
+    </a>
+</p>
+     <div class="input-group">    
+       <input type="text" class="form-control">
+       <div class="input-group-btn">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Search <span class="caret"></span></button>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="#">Search by Manufacturer</a></li>
+          <li><a href="#">Search by Model</a></li>
+          <li><a href="#">Search by Name</a></li>
+        </ul>
+        </div>
+    </div>
+<table class="table table-responsive table-condensed table-hover table-striped">
+    <tr class="bg-primary">
+        <th>Model</th>
+        <th>Manufacturer</th>
+        <th>Name</th>
+        <th></th>
+    </tr>
+    <?php foreach ($items as $item) : ?>
+    <tr>
+        <td><?php echo $this->escapeHtml($item->model);?></td>
+        <?php if (!is_null($item->manufacturer)) : ?>
+           <td><?php echo $this->escapeHtml($item->manufacturer->name);?></td>
+        <?php else : ?>
+           <?php #print_r($user); ?>
+           <td>Manufacturer not set</td>
+        <?php endif; ?>
+        <?php if (!is_null($item->name)) : ?>
+           <td><?php echo $this->escapeHtml($item->name);?></td>
+        <?php else : ?>
+           <td>No Model</td>
+        <?php endif; ?>
+        <td align ="right">
+            <a href="<?php echo $this->url('item', array('action' => 'edit', 'id' => $item->id));?>">
+                <button type="button" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-edit"></span> Edit this item
+                </button>
+            </a>
+            <a href="<?php echo $this->url('item', array('action' => 'delete', 'id' => $item->id));?>">
+                <button type="button" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-remove"></span> Delete this item
+                </button></a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>

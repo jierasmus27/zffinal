@@ -20,6 +20,9 @@ class ItemHydrator implements HydratorInterface {
         $arrItem["name"] = ($item->name == "") ? null : $item->name;
         $arrItem["model"] = ($item->model == "") ? null : $item->model;
         $arrItem["manufacturer_id"] = ($item->manufacturer->id == "") ? null : $item->manufacturer->id;
+        if ($arrItem["manufacturer_id"] == null) {
+            $arrItem["manufacturer_id"] = ($item->manufacturer_id == "") ? null : $item->manufacturer_id;
+        }
         $arrItem["description"] = ($item->description == "") ? null : $item->description;
         return $arrItem;
     }
@@ -34,6 +37,7 @@ class ItemHydrator implements HydratorInterface {
         $item->id = isset($data["id"]) ? $data["id"] : null;
         $item->name = isset($data["name"]) ? $data["name"] : null;
         $item->model = isset($data["model"]) ? $data["model"] : null;
+        $item->manufacturer_id = isset($data["manufacturer_id"]) ? $data["manufacturer_id"] : null;
         
         $manufacturer = new \BidSite\Entity\Manufacturer();
         $manufacturer->id = isset($data["manufacturer_id"]) ? $data["manufacturer_id"] : null;

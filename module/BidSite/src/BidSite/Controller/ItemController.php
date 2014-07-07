@@ -142,7 +142,7 @@ class ItemController extends AbstractActionController {
         $form->get('manufacturer_id')->setValueOptions($arr_manufacturers);
         
         if ($request->isPost()) {
-            $form->setData($post);
+            $form->bind($post);
 
             if ($form->isValid()) {
                 $item = $this->itemService->add($form->getData());
@@ -186,7 +186,7 @@ class ItemController extends AbstractActionController {
      * Set the relevant Item Form
      * 
      * @param \Bidite\Form\ItemForm
-     * @return ItemController
+     * @return \BidSite\Controller\ItemController
      */
     public function setItemForm(ItemForm $itemForm) {
         $this->itemForm = $itemForm;
@@ -213,7 +213,7 @@ class ItemController extends AbstractActionController {
      * Set the Item Service object
      * 
      * @param \BidSite\Service\ItemService
-     * @return ItemController
+     * @return \BidSite\Controller\ItemController
      */
     public function setItemService(ItemService $itemService)
     {
